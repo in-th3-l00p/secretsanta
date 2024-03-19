@@ -97,22 +97,22 @@ namespace SecretSanta.forms.controls
                 shuffledUsers[lo] = aux;
             }
 
-            var client = new SmtpClient("live.smtp.mailtrap.io", 587)
+            var client = new SmtpClient("sandbox.smtp.mailtrap.io", 2525)
             {
-                Credentials = new NetworkCredential("api", "f4bcb542ceee2d7f953d17f1192e8f09"),
+                Credentials = new NetworkCredential("5b881f556a7d8b", "79a102b3b837ff"),
                 EnableSsl = true
             };
 
             for (int i = 0; i < shuffledUsers.Count - 1; i++)
             {
                 client.Send(
-                    "mailtrap@demomailtrap.com", shuffledUsers[i].Email, "Secret Santa",
+                    "secretsanta@test.com", shuffledUsers[i].Email, "Secret Santa",
                     shuffledUsers[i + 1].Name 
                 );
             }
 
             client.Send(
-                "mailtrap@demomailtrap.com", shuffledUsers[shuffledUsers.Count - 1].Email, "Secret Santa",
+                "secretsanta@test.com", shuffledUsers[shuffledUsers.Count - 1].Email, "Secret Santa",
                 shuffledUsers[0].Name 
             );
 

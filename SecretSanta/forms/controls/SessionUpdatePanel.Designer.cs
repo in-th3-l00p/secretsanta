@@ -35,9 +35,17 @@
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.locationTextBox = new System.Windows.Forms.TextBox();
             this.keyTextBox = new System.Windows.Forms.TextBox();
+            this.wishlistLabel = new System.Windows.Forms.Label();
+            this.wishlistLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.wishlist = new System.Windows.Forms.ListBox();
+            this.buttonsLayout = new System.Windows.Forms.FlowLayoutPanel();
+            this.addButton = new System.Windows.Forms.Button();
+            this.removeButton = new System.Windows.Forms.Button();
             this.mainLayout = new System.Windows.Forms.TableLayoutPanel();
             this.startButton = new System.Windows.Forms.Button();
             this.dataLayout.SuspendLayout();
+            this.wishlistLayout.SuspendLayout();
+            this.buttonsLayout.SuspendLayout();
             this.mainLayout.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,6 +60,8 @@
             this.dataLayout.Controls.Add(this.nameTextBox, 1, 0);
             this.dataLayout.Controls.Add(this.locationTextBox, 1, 1);
             this.dataLayout.Controls.Add(this.keyTextBox, 1, 2);
+            this.dataLayout.Controls.Add(this.wishlistLabel, 0, 3);
+            this.dataLayout.Controls.Add(this.wishlistLayout, 1, 3);
             this.dataLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataLayout.Location = new System.Drawing.Point(3, 3);
             this.dataLayout.Name = "dataLayout";
@@ -126,6 +136,72 @@
             this.keyTextBox.Size = new System.Drawing.Size(255, 20);
             this.keyTextBox.TabIndex = 5;
             // 
+            // wishlistLabel
+            // 
+            this.wishlistLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.wishlistLabel.AutoSize = true;
+            this.wishlistLabel.Location = new System.Drawing.Point(43, 80);
+            this.wishlistLabel.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
+            this.wishlistLabel.Name = "wishlistLabel";
+            this.wishlistLabel.Size = new System.Drawing.Size(46, 13);
+            this.wishlistLabel.TabIndex = 6;
+            this.wishlistLabel.Text = "Wishlist:";
+            // 
+            // wishlistLayout
+            // 
+            this.wishlistLayout.ColumnCount = 2;
+            this.wishlistLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.wishlistLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.wishlistLayout.Controls.Add(this.wishlist, 0, 0);
+            this.wishlistLayout.Controls.Add(this.buttonsLayout, 1, 0);
+            this.wishlistLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wishlistLayout.Location = new System.Drawing.Point(135, 78);
+            this.wishlistLayout.Name = "wishlistLayout";
+            this.wishlistLayout.RowCount = 1;
+            this.wishlistLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.wishlistLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 264F));
+            this.wishlistLayout.Size = new System.Drawing.Size(403, 264);
+            this.wishlistLayout.TabIndex = 7;
+            // 
+            // wishlist
+            // 
+            this.wishlist.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wishlist.FormattingEnabled = true;
+            this.wishlist.Location = new System.Drawing.Point(3, 3);
+            this.wishlist.MaximumSize = new System.Drawing.Size(400, 250);
+            this.wishlist.Name = "wishlist";
+            this.wishlist.Size = new System.Drawing.Size(347, 250);
+            this.wishlist.TabIndex = 7;
+            // 
+            // buttonsLayout
+            // 
+            this.buttonsLayout.Controls.Add(this.addButton);
+            this.buttonsLayout.Controls.Add(this.removeButton);
+            this.buttonsLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonsLayout.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.buttonsLayout.Location = new System.Drawing.Point(356, 3);
+            this.buttonsLayout.Name = "buttonsLayout";
+            this.buttonsLayout.Size = new System.Drawing.Size(44, 258);
+            this.buttonsLayout.TabIndex = 8;
+            // 
+            // addButton
+            // 
+            this.addButton.Location = new System.Drawing.Point(3, 3);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(41, 23);
+            this.addButton.TabIndex = 0;
+            this.addButton.Text = "+";
+            this.addButton.UseVisualStyleBackColor = true;
+            // 
+            // removeButton
+            // 
+            this.removeButton.Location = new System.Drawing.Point(3, 32);
+            this.removeButton.Name = "removeButton";
+            this.removeButton.Size = new System.Drawing.Size(41, 23);
+            this.removeButton.TabIndex = 1;
+            this.removeButton.Text = "-";
+            this.removeButton.UseVisualStyleBackColor = true;
+            // 
             // mainLayout
             // 
             this.mainLayout.ColumnCount = 1;
@@ -162,6 +238,8 @@
             this.Size = new System.Drawing.Size(547, 389);
             this.dataLayout.ResumeLayout(false);
             this.dataLayout.PerformLayout();
+            this.wishlistLayout.ResumeLayout(false);
+            this.buttonsLayout.ResumeLayout(false);
             this.mainLayout.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -178,5 +256,11 @@
         private System.Windows.Forms.TextBox keyTextBox;
         private System.Windows.Forms.TableLayoutPanel mainLayout;
         private System.Windows.Forms.Button startButton;
+        private System.Windows.Forms.Label wishlistLabel;
+        private System.Windows.Forms.TableLayoutPanel wishlistLayout;
+        private System.Windows.Forms.ListBox wishlist;
+        private System.Windows.Forms.FlowLayoutPanel buttonsLayout;
+        private System.Windows.Forms.Button addButton;
+        private System.Windows.Forms.Button removeButton;
     }
 }
