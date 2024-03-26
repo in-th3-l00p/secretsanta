@@ -22,6 +22,7 @@ namespace SecretSanta.services
                 "connect_key VARCHAR(50) NOT NULL," +
                 "owner BIT NOT NULL," +
                 "session_id INT NOT NULL," +
+                "chosen_session_key_id INT," +
                 "FOREIGN KEY (session_id) REFERENCES session(id)," +
                 ")" +
                 "END",
@@ -125,6 +126,18 @@ namespace SecretSanta.services
                 ),
                 DatabaseConnection.Instance.Connection
             )).ExecuteNonQuery();
+        }
+
+        public static void SetChosen(SessionKey sessionKey, int chosen)
+        {
+            (new SqlCommand(
+                String.Format(
+                    "UPDATE session_key SET chosen_session_key_id={0} WHERE id={1}",
+                    chosen, sessionKey.Id
+                ),
+                DatabaseConnection.Instance.Connection
+            )).ExecuteNonQuery();
+            sessionKey.ChosenSessionKeyId = chosen;
         }
     }
 }

@@ -74,7 +74,6 @@
             // keyTextBox
             // 
             this.keyTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.keyTextBox.Enabled = false;
             this.keyTextBox.Location = new System.Drawing.Point(76, 53);
             this.keyTextBox.MaximumSize = new System.Drawing.Size(400, 4);
             this.keyTextBox.MinimumSize = new System.Drawing.Size(4, 20);

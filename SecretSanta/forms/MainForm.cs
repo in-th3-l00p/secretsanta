@@ -1,4 +1,5 @@
-﻿using SecretSanta.services;
+﻿using SecretSanta.forms;
+using SecretSanta.services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -45,9 +46,21 @@ namespace SecretSanta
                 return;
             }
 
-            var sessionForm = new SessionForm(codeTextBox.Text);
-            this.Hide();
-            sessionForm.Show();
+            var sessionKey = SessionKeyService.Get(codeTextBox.Text);
+            if (!sessionKey.Owner && !sessionKey.ChosenSessionKeyId.HasValue)
+                return;
+
+            if (!sessionKey.Owner)
+            {
+                var wishlistSessionForm = new WishlistSessionForm(codeTextBox.Text);
+                this.Hide();
+                wishlistSessionForm.Show();
+            } else
+            {
+                var sessionForm = new SessionForm(codeTextBox.Text);
+                this.Hide();
+                sessionForm.Show();
+            }
         }
     }
 }

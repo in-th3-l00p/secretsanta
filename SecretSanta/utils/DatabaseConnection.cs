@@ -37,6 +37,7 @@ namespace SecretSanta
 
             SessionService.CreateTable();
             SessionKeyService.CreateTable();
+            WishlistService.CreateTable();
         }
 
         public static int CountEntitites(string table)

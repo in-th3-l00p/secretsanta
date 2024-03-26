@@ -20,7 +20,7 @@ namespace SecretSanta.services
                     "id INT PRIMARY KEY IDENTITY (1, 1)," +
                     "name VARCHAR(255) NOT NULL," +
                     "location VARCHAR(255) NOT NULL," +
-                ")" +
+                ")\n" +
                 "END",
                 DatabaseConnection.Instance.Connection
             )).ExecuteNonQuery();

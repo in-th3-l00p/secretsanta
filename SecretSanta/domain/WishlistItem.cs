@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SecretSanta.domain
 {
-    internal class WishlistItem
+    public class WishlistItem
     {
         private int id;
         public int Id

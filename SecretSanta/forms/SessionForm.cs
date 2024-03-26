@@ -104,6 +104,17 @@ namespace SecretSanta
                 usersIndex++;
             users[usersIndex].Name = newSessionKey.Name;
             users[usersIndex].Email = newSessionKey.Email;
+            foreach (var listItem in usersList.Items)
+            {
+                var listViewItem = listItem as ListViewItem;
+                Nullable<int> currentUserId = listViewItem.Tag as Nullable<int>;
+                if (!currentUserId.HasValue)
+                    return;
+                var currentUser = SessionKeyService.Get(currentUserId.Value);
+                if (currentUser.Id != users[usersIndex].Id)
+                    continue;
+                listViewItem.Text = currentUser.Name;
+            }
         }
     }
 }

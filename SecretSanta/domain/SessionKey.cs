@@ -14,6 +14,7 @@ namespace SecretSanta.domain
         private string email;
         private string key;
         private int sessionId;
+        private Nullable<int> chosenSessionKeyId;
         private bool owner;
 
         public int Id { get { return id; } }
@@ -27,16 +28,28 @@ namespace SecretSanta.domain
         }
         public string Key { get { return key; } }
         public int SessionId { get { return sessionId; } }
+        public Nullable<int> ChosenSessionKeyId { 
+            get { return chosenSessionKeyId; } 
+            set { this.chosenSessionKeyId = value; }
+        }
         public bool Owner { get { return owner; } }
 
         public SessionKey() { }
-        public SessionKey(int id, string name, string email, string key, int sessionId, bool owner)
-        {
+        public SessionKey(
+            int id, 
+            string name, 
+            string email, 
+            string key, 
+            int sessionId, 
+            int chosenSessionKeyId, 
+            bool owner
+            ) {
             this.id = id;
             this.name = name;
             this.email = email;
             this.key = key;
             this.sessionId = sessionId;
+            this.chosenSessionKeyId = chosenSessionKeyId;
             this.owner = owner;
         }
         public SessionKey(SessionKey other)
@@ -46,6 +59,7 @@ namespace SecretSanta.domain
             this.email = other.email;
             this.key = other.key;
             this.sessionId = other.sessionId;
+            this.chosenSessionKeyId= other.chosenSessionKeyId;
             this.owner = other.owner;
         }
 
@@ -57,6 +71,10 @@ namespace SecretSanta.domain
             this.key = reader.GetString(3);
             this.owner = reader.GetBoolean(4);
             this.sessionId = reader.GetInt32(5);
+            if (reader.IsDBNull(6))
+                this.chosenSessionKeyId = null;
+            else
+                this.chosenSessionKeyId = reader.GetInt32(6);
         }
     }
 }

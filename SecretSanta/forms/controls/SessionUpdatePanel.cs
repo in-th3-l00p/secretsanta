@@ -1,4 +1,5 @@
 ﻿using SecretSanta.domain;
+using SecretSanta.forms.dialogs;
 using SecretSanta.services;
 using System;
 using System.Collections.Generic;
@@ -45,6 +46,14 @@ namespace SecretSanta.forms.controls
                 if (sessionKey == null)
                     return;
                 keyTextBox.Text = value.Key;
+                foreach (var wishlistItem in WishlistService.GetFromSessionKey(sessionKey))
+                    wishlist.Items.Add(wishlistItem);
+                if (sessionKey.ChosenSessionKeyId.HasValue)
+                {
+                    int id = sessionKey.ChosenSessionKeyId.GetValueOrDefault();
+                    foreach (var wishlistItem in WishlistService.GetFromSessionKey(SessionKeyService.Get(id)))
+                        chosenWishlist.Items.Add(wishlistItem);
+                }
             }
         }
 
@@ -58,6 +67,10 @@ namespace SecretSanta.forms.controls
         public SessionUpdatePanel()
         {
             InitializeComponent();
+            wishlist.DisplayMember = "Text";
+            wishlist.ValueMember = "Id";
+            chosenWishlist.DisplayMember = "Text";
+            chosenWishlist.ValueMember = "Id";
         }
 
         private void startButton_Click(object sender, EventArgs e)
@@ -97,6 +110,10 @@ namespace SecretSanta.forms.controls
                 shuffledUsers[lo] = aux;
             }
 
+            for (int i = 0; i < shuffledUsers.Count - 1; i++)
+                SessionKeyService.SetChosen(shuffledUsers[i], shuffledUsers[i + 1].Id); 
+            SessionKeyService.SetChosen(shuffledUsers[shuffledUsers.Count - 1], shuffledUsers[0].Id); 
+
             var client = new SmtpClient("sandbox.smtp.mailtrap.io", 2525)
             {
                 Credentials = new NetworkCredential("5b881f556a7d8b", "79a102b3b837ff"),
@@ -122,6 +139,38 @@ namespace SecretSanta.forms.controls
         private void SessionTextChanged(object sender, EventArgs e)
         {
             SessionService.Update(session.Id, nameTextBox.Text, locationTextBox.Text);
+        }
+
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            WishlistItem item = WishlistService.Create(
+                sessionKey, 
+                "Item " + WishlistService.Count().ToString()
+            );
+
+            wishlist.Items.Add(item);
+        }
+
+        private void removeButton_Click(object sender, EventArgs e)
+        {
+            if (wishlist.SelectedItem.Equals(null))
+                return;
+            var wishlistItem = wishlist.SelectedItem as WishlistItem;
+            WishlistService.Delete(wishlistItem.Id);
+            wishlist.Items.Remove(wishlist.SelectedItem);
+        }
+
+        private void wishlist_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (wishlist.SelectedItems.Equals(null))
+                return;
+            WishlistItemEdit editDialog = new WishlistItemEdit();
+            editDialog.CurrentWishlistItem = wishlist.SelectedItem as WishlistItem;
+            editDialog.ShowDialog();
+
+            wishlist.Items.Clear();
+            foreach (var wishlistItem in WishlistService.GetFromSessionKey(sessionKey))
+                wishlist.Items.Add(wishlistItem);
         }
     }
 }
